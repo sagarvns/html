@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>drag and drop </title>
+</head>
+    <style>
+        div{
+            width: 50px;
+            height: 50px;
+            border-color: teal;
+            border-style: ridge;
+        }
+    
+    </style>
+<script>
+    function doAutoMove()
+    {
+        var desty=1;
+        var destx=3;
+        var dt={getData:function(x){return "bttn1";}};
+        var event={target:document.getElementById("d13"),datatransfer:dt};
+
+        console.log(event);
+    drop(event);
+    }
+
+    var board=[
+       [1,1,0,0],
+       [0,0,0,0],
+       [0,0,0,0],
+       [0,0,0,0] 
+    ];
+    function printBoard()
+    {
+        console.log("Board")
+        for(var i=0;i<=3;i++)
+        {
+            for(var j=0;j<=3;j++)
+            {
+                console.log(board[i][j]);
+            }
+        }
+    }
+    function getY(id)
+    {
+        return id[1]
+    }
+    function getX(id)
+    {
+        return id[2]
+    }
+function drag(event)
+{
+    consol.log(event.target.id)
+    event.datatransfer.seData("id",event.target.id);
+}
+function dragover(event)
+{
+    event.preventDefault();
+    console.log(event.target.id);
+}
+function drop(event)
+{
+    printBoard();
+    console.log(event);
+    var droppingid=event.datatransfer.getData("id");
+    var targetid=event.target.id;
+    console.log(targetid);
+    var y=getY(targetid);
+    var x=getX(targetid);
+    var value=board[y-1][x-1]
+    console.log(value);
+    if(value!=0)
+    {
+        alert("cannot drop here")
+        return;
+    }
+
+   var b=document.getElementById(droppingid);
+   var droppingParentId=b.parentElement.id;
+   var srcx=getX(droppingParentId);
+   var srcy=getY(droppingParentId); 
+   console.log(droppingParentId)
+   board[srcy-1][srcx-1]=0;
+   board[y-1][x-1]=1;
+   printBoard();
+}
+</script>    
+<body>
+ <table>
+        <tr><td><div id="d11" ondrop="drop(event)" ondragover="dragover(event)">
+        
+            <input type="button" value="coin 1" id="bttn1" draggable="true" ondragstart="drag(event)">
+        
+        </div></td><td><div id="d12" ondrop="drop(event)" ondragover="dragover(event)">
+            <input type="button" value="coin 2" id="bttn2" draggable="true" ondragstart="drag(event)">
+        
+        
+        </div></td><td><div id="d13" ondrop="drop(event)" ondragover="dragover(event)"></div></td><td><div></div></td></tr>
+       <tr><td><div></div></td><td><div></div></td><td><div></div></td><td><div></div></td></tr>
+        <tr><td><div></div></td><td><div></div></td><td><div></div></td><td><div></div></td></tr>
+        <tr><td><div></div></td><td><div></div></td><td><div></div></td><td><div></div></td></tr>
+        
+            </table>
+            
+            <input type="button" value="Auto Move" onclick="doAutoMove()">
+        </body>
+
+</body>
+</html>

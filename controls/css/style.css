@@ -1,0 +1,13 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.red{
+    background-color: rgb(126, 190, 145);
+    color: white;
+    height: 230px;
+}
+.green{
+    background-color: yellow;
+    color: aqua;
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1 D Array</title>
+</head>
+<script>
+    function f1()
+    {
+        var d=document.getElementById("d");
+        d.innerHTML="";
+var colors = ["red","blue","green"];
+for (var i = 0; i < colors.length; i++) {
+    console.log(colors[i]);
+    d.innerHTML+=colors[i] + "<br>";
+}
+    }
+</script>
+<body>
+    <div id="d">
+</div>
+<input type="button" value="Array" onclick="f1()">
+    
+</body>
+</html>

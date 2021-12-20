@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box in Array</title>
+    <style>
+        tr,td {
+            border: 1px solid black;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+    <script>
+        n=1;
+        function f(){
+            var  a = [
+                [1,2,3],
+                [4,5,6]
+            ];
+            for(i=1;i<=2;i++)
+            {
+                for(j=1;j<=3;j++)
+                {
+                    var currentid="b" + i + j;
+                    document.getElementById(currentid).innerHTML=currentid  + a[i-1][j-1];
+                    console.log(a);
+                }
+            }
+        }
+
+    </script>
+</head>
+<body><div>
+    <table align="center"> 
+    <tr> 
+        <td><div id="b11"></div></td>
+        <td><div id="b12"></div></td>
+        <td><div id="b13"></div></td>
+    </tr>
+    <tr>
+        <td><div id="b21"></div></td>
+        <td><div id="b22"></div></td>
+        <td><div id="b23"></div></td>
+    </tr>
+</table>  
+    <br><button type="submit" onclick="f1()">Array</button>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+#dropdestination {
+  width: 350px;
+  height: 70px;
+  padding: 10px;
+  border: 1px solid #aaaaaa;
+}
+</style>
+<script>
+function allowDrop(ev) {
+console.log("Drop Target");
+console.log(ev.target.id);
+  ev.preventDefault();
+}
+
+function drag(ev) {
+console.log("Drag Started");
+console.log(ev.target.id);
+  ev.dataTransfer.setData("text", ev.target.id);
+}
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
+function drop(ev) {
+console.log("Dropping Started");
+console.log(ev.target.id);
+  ev.preventDefault();
+  var data = ev.dataTransfer.getData("text");
+  console.log("Data being dropped");
+console.log(data);
+console.log(document.getElementById(data));
+
+  console.log("Img");
+  console.log("Dropping " + data + " to " + ev.target.id);
+  removeAllChildNodes(ev.target);
+  var img=document.getElementById(data);
+  
+  console.log(img);
+  ev.target.appendChild(img); 
+}
+</script>
+</head>
+<body>
+
+<p>Drag the Image into the rectangle:</p>
+
+<div id="dropdestination" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+<br>
+<img id="dragsrc" src="https://3.bp.blogspot.com/-py5FbTZgvjo/YDi1bsQq16I/AAAAAAAACB0/BxejbJBcHA4AVfkB33WYC3YlVmxElM7BwCK4BGAYYCw/s1600/Varanasi%2BSoftware%2BJunction%2BPhone%2BLogo.png" draggable="true" ondragstart="drag(event)" height="69">
+<img id="dragsrc1" src="https://blogger.googleusercontent.com/img/a/AVvXsEgiDj2h8WMuFGZB8WaLkB-5wg9q3SCv_NprdQseH3PntWmbedxyFmaS78UEwjv7WEMh3mkUCThk0xEuuSrCBoJgLH2NuNbg61jKS_uEPpOXQ1-Y4bNxCKJpEGKIuDtDnsxZIMrbEXcuthMuRAO9_n1YikHmHYjxqnnP-ADGNlYwptLMo94soSb143mc=w640" draggable="true" ondragstart="drag(event)" height="69">
+</body>
+</html>
+

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+    <script>
+function f1()
+{
+    console.log("Inside f1");
+    //var t1=open("https://google.com");
+    //document.write("Hello");
+    //Document Object Model = DOM
+    var t1=document.getElementById("a");
+    var t2=document.getElementById("b");
+    var t3=document.getElementById("result");
+    // t3.value=Number( t1.value) + Number( t2.value);
+    t3.value=Number( t1.value) - Number(t2.value);
+
+    console.log(t1);
+    var i1=document.getElementById("img1");
+    i1.src="1.jpg";
+    //t1.type="radio";
+    //t1.value="Hello";
+}
+
+
+    </script>
+    <style>
+img{
+    width:100px;
+}
+
+    </style>
+</head>
+<body>
+    <img src="1.jfif" id="img1">
+    <table>
+        <tr><td>A <input id="a" required type="text"></td></tr>
+        <tr><td>B <input id="b" required type="text"></td></tr>
+        <tr><td>Result <input id="result" required type="text"></td></tr>
+        <tr><td> <input  type="button" value="sub" onclick="f1()"></td></tr>
+    
+    </table>
+</body>
+</html>

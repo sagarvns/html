@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+#dropdestination {
+  width: 350px;
+  height: 70px;
+  padding: 10px;
+  border: 1px solid teal;
+}
+</style>
+<script>
+function allowDrop(ev) {
+  //Second Function
+console.log("Drop Target");
+console.log(ev.target.id);
+  ev.preventDefault();
+}
+
+function drag(ev) {
+  //First Function
+console.log("Drag Started");
+console.log(ev.target.id);
+  ev.dataTransfer.setData("buttonvalue", ev.target.value);
+}
+
+function drop(ev) {
+console.log("Dropping Started");
+console.log(ev.target.id);
+  ev.preventDefault();
+  var data = ev.dataTransfer.getData("buttonvalue");
+  console.log("Data being dropped");
+console.log(data);
+  ev.target.value=data;   
+
+}
+</script>
+</head>
+<body>
+
+<p>Drag the Image into the rectangle:</p>
+<div id="dropdestination" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+<!-- <input type="button" id="dropdestination" ondrop="drop(event)" ondragover="allowDrop(event)" value="Drop Destination"> -->
+<br>
+<input id="dragbutton" type="button" value="Drag" draggable="true" ondragstart="drag(event)" height="69">
+</body>
+</html>
+

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        n=1;
+        function f(){
+            
+          var  a = [
+                [1,2,3],
+                [4,5,6]
+            ];
+            for(i=1;i<=2;i++)
+            {
+                for(j=1;j<=3;j++)
+                {
+                    var currentid="b" + i + j;
+                    document.getElementById(currentid).innerHTML=currentid  + a[i-1][j-1];
+                    console.log(a);
+                }
+            }
+        }
+
+
+    </script>
+    <style>
+       th,td {
+           border: 2px solid black;
+           width: 100px ;
+           height: 100px;
+
+        }
+    </style>
+</head>
+<body><div>
+    <table align="center">
+        <tr>
+            <td>
+            <div  id="b11"></div></div></td>
+            <td id="b12"> </td>
+            <td id="b13"></td>
+        </tr>
+        <tr>
+            <td id="b21"></td>
+            <td id="b22"></td>
+            <td id="b23"></td>
+        </tr>
+    </table ><br> <button type="button" onclick="f()"> Array</button></div>
+</body>
+</html>

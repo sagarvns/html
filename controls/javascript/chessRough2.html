@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rough2 chess </title>
+</head>
+<style>
+    .blackcoin
+    {
+        font-weight: bold;
+color: black;
+    }
+    .whitecoin
+    {
+color:white;
+font-weight: bold;
+    }
+     td,th{
+           border: 2px solid teal;
+           width: 70px ;
+           height: 70px;
+           background-color: white;
+        }
+    .white{
+        background-color:  rgb(235, 212, 212);
+        /* padding-top: 7px; */
+        /* padding: 11px; */
+    }
+    .black{
+        background-color: #802a2a;
+        /* padding-top: 7px; */
+        /* padding: 11px; */
+    }
+</style>
+<script>
+     function isPlacingValid(srcy,srcx,desty,destx,coin)
+     {
+        var value=Board[desty-1][destx-1];
+        if(coin.name=="knight")
+        {
+        console.log("Knight");
+            value=isknightvalid(srcy,srcx,desty,destx);
+            return value;
+        }
+        if(coin.name=="rook")
+        {
+        console.log("rook")
+            value=rookisvalid(srcy,srcx,desty,destx)
+            return value
+        }
+        if(coin.name=="bishop")
+        {
+        console.log==("bishop")
+            value=isbishopvalid(srcy,srcx,desty,destx)
+            return value
+        }
+        if(coin.name=="queen")
+        {
+            console.log==("queen")
+            value=isQueenvalid(srcy,srcx,desty,destx)
+            return value
+        }
+        if(coin.name=="king")
+        {
+            console.log==("king")
+            value=Kingvalid(srcy,srcx,desty,destx)
+            return value
+        }
+        if(coin.color=="black")
+        {
+            // console.log("white")
+            value=pawnvalid(srcy,srcx,desty,destx)
+            return value
+        }
+        if(coin.color=="white")
+        {
+            // console.log("white")
+
+            value=pawnvalid(srcy,srcx,desty,destx)
+            return white
+        }
+        
+        if(value==0)
+         return true;
+
+         return false;
+    }
+
+    function isknightvalid(srcy,srcx,y,x){
+      if (srcy-y== 2 && srcx-x==-1)
+      return true;
+      if (srcy-y== 1 && srcx-x==-2)
+      return true;
+      if (srcy-y== -1 && srcx-x==-2)
+      return true;
+      if (srcy-y== -2 && srcx-x==-1)
+      return true;
+      if (srcy-y== -2 && srcx-x==1)
+      return true;
+      if (srcy-y== -1 && srcx-x==2)
+      return true;
+      if (srcy-y== 1 && srcx-x==2)
+        return true;
+     if (srcy-y== 2 && srcx-x== 1 )
+     return true;
+
+        return false;
+
+}
+function rookisvalid(srcy,srcx,y,x){
+    if (srcx==x)
+    return true;
+    if (srcy==y)
+    return true;
+
+    return false;
+
+}
+function isbishopvalid(srcy,srcx,y,x){
+    if (srcy-srcx==y-x)
+    return true;
+    if (srcy + srcx == x + y)
+    return true;
+    return false;
+    }
+function isQueenvalid(srcy,srcx,y,x){
+    if (srcy-srcx==y-x)
+    return true;
+    if (srcy + srcx == x + y)
+    return true;
+    if (srcx==x)
+    return true;
+    if (srcy==y)
+    return true;
+    return false;
+}
+function Kingvalid(srcy,srcx,y,x){
+
+    if (srcy-y== 0 && srcx-x== 0)
+      return true;
+      if (srcy-y== 0 && srcx-x== 1)
+      return true;
+      if (srcy-y== -1 && srcx-x== 1)
+      return true;
+      if (srcy-y== -1 && srcx-x== 0)
+      return true;
+      if (srcy-y== -1 && srcx-x==-1)
+      return true;
+      if (srcy-y== 0 && srcx-x== -1)
+      return true;  
+      if (srcy-y== 1 && srcx-x== -1)
+        return true;
+     if (srcy-y== 1 && srcx-x== 0 )
+     return true;
+
+        return false
+    }
+    function pawnvalid(srcy,srcx,y,x)
+    {   
+        if  ( srcy-y==1 && srcx==x)
+        return true;
+        if ( srcy-y ==-1 && srcx==x)
+        return true;
+        return false
+    }
+
+
+
+    function getCoin(name,color)
+    {
+        return{name:name,color:color}
+    }
+    
+    var Board=[
+        [getCoin("rook","black"),getCoin("knight","black"),getCoin("bishop","black"),getCoin("king","black"),getCoin("queen","white"),getCoin("bishop","black"),getCoin("knight","black"),getCoin("rook","black")],
+        [getCoin("pawn","black"),getCoin("pawn","black"),getCoin("pawn","black"),getCoin("pawn","black"),getCoin("pawn","black"),getCoin("pawn","black"),getCoin("pawn","black"),getCoin("pawn","black")],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [getCoin("pawn","white"),getCoin("pawn","white"),getCoin("pawn","white"),getCoin("pawn","white"),getCoin("pawn","white"),getCoin("pawn","white"),getCoin("pawn","white"),getCoin("pawn","white")],
+        [getCoin("rook","white"),getCoin("knight","white"),getCoin("bishop","white"),getCoin("queen","white"),getCoin("king","white"),getCoin("bishop","white"),getCoin("knight","white"),getCoin("rook","white")],
+     ];
+    function printBoard()
+    {
+        for(var i=0;i<=7;i++)
+        {
+            var str="";
+            for(var j=0;j<=7;j++)
+            {
+                str += "," + Board[i][j];
+            }
+            console.log(str);
+
+        }
+    }
+    function getY(id)
+    {
+        return Number(id[1]);
+    }
+    function getX(id)
+    {
+        return Number(id[2]);
+    }
+
+     function Drag(ev){
+         console.log("Start Drag")
+         console.log(ev.target.id)
+         ev.dataTransfer.setData("id",ev.target.id)
+     }
+     function Dragover(ev)
+     {
+         event.preventDefault();
+        // console.log("Drag Over");
+        // console.log(ev.target.id)
+     }  
+    function Drop(ev)
+    {   var droppingid= event.dataTransfer.getData("id")
+        var targetid=event.target.id;
+        console.log(targetid);
+        var y=getY(targetid);
+        var x=getX(targetid);
+        var b=document.getElementById(droppingid);
+        var bparent=document.getElementById(b.parentElement.id);
+        var srcx=getX(bparent.id);
+        var srcy=getY(bparent.id);
+        var oldcoin=Board[srcy-1][srcx-1];
+        var value=isPlacingValid(srcy,srcx,y,x,oldcoin);
+        console.log(value);
+        if(!value)
+        {
+         alert("cannot drop Here")
+            return;
+        }
+        ev.preventDefault;
+       
+        event.target.appendChild(b);
+        console.log(srcy + "," + srcx + "," + y + "," + x);
+        
+        Board[srcy-1][srcx-1]=0;
+        //Board[0][0]=100;
+        Board[y-1][x-1]=oldcoin;
+        console.log(oldcoin)
+        console.log("Board");
+        printBoard();
+    }   
+       
+</script>
+<body>
+
+    <div class="row">
+        <div class="col-sm-12 p-4"></div>
+        <div class="col-sm-3"></div> 
+        <div class="col-sm-5">
+        <table>
+            <tr>
+                <td class="white"><div ondragover="Dragover(event)"  ondrop="Drop(event)" id="A11"> &nbsp; <h1 class="whitecoin" id="a1" draggable="true" ondragstart="Drag(event)">♖</h1></div></td>
+                <td class="black"><div ondragover="Dragover(event)"  ondrop="Drop(event)"  id="A12">&nbsp; <h1  class="whitecoin"  id="a2" draggable="true" ondragstart="Drag(event)">♘</h1> </div> </td>
+                <td class="white"><div ondragover="Dragover(event)"  ondrop="Drop(event)"  id="A13">&nbsp; <h1  class="whitecoin"  id="a3" draggable="true" ondragstart="Drag(event)">♗</h1> </div></td>
+                <td class="black"><div ondragover="Dragover(event)"  ondrop="Drop(event)" id="A14"> &nbsp; <h1  class="whitecoin"  id="a4" draggable="true" ondragstart="Drag(event)">♔</h1></div></td>
+                <td class="white"><div ondragover="Dragover(event)"  ondrop="Drop(event)"  id="A15">&nbsp; <h1  class="whitecoin"  id="a5" draggable="true" ondragstart="Drag(event)">♕</h1> </div> </td>
+                <td class="black"><div ondragover="Dragover(event)"  ondrop="Drop(event)"  id="A16">&nbsp; <h1  class="whitecoin"  id="a6" draggable="true" ondragstart="Drag(event)">♗</h1> </div></td>
+                <td class="white"><div ondragover="Dragover(event)"  ondrop="Drop(event)"  id="A17">&nbsp; <h1  class="whitecoin"  id="a7" draggable="true" ondragstart="Drag(event)">♘</h1> </div></td>
+                <td class="black"><div ondragover="Dragover(event)"  ondrop="Drop(event)"  id="A18">&nbsp; <h1  class="whitecoin"  id="a8" draggable="true" ondragstart="Drag(event)">♖</h1> </div></td>
+
+            </tr>
+            <tr>
+                <td class="black"><div id="B21" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp; <h1  class="whitecoin"  id="b1" draggable="true" ondragstart="Drag(event)" >♙</h1></div> </td>
+                <td class="white"><div id="B22" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp; <h1  class="whitecoin"  id="b2" draggable="true" ondragstart="Drag(event)">♙</h1> </div> </td>
+                <td class="black"><div id="B23" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp; <h1  class="whitecoin"  id="b3" draggable="true" ondragstart="Drag(event)">♙</h1> </div> </td>
+                <td class="white"><div id="B24" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp; <h1  class="whitecoin"  id="b4" draggable="true" ondragstart="Drag(event)">♙</h1> </div> </td>
+                <td class="black"><div id="B25" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp; <h1   class="whitecoin" id="b5" draggable="true" ondragstart="Drag(event)">♙</h1> </div> </td>
+                <td class="white"><div id="B26" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp; <h1  class="whitecoin"  id="b6" draggable="true" ondragstart="Drag(event)">♙</h1> </div> </td>
+                <td class="black"><div id="B27" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp; <h1  class="whitecoin"  id="b7" draggable="true" ondragstart="Drag(event)">♙</h1> </div> </td>
+                <td class="white"><div id="B28" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp; <h1  class="whitecoin"  id="b8" draggable="true" ondragstart="Drag(event)">♙</h1> </div> </td>
+
+            </tr>
+            <tr>
+                <td class="white"><div id="C31" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp; </div> </td>
+                <td class="black"><div id="C32" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp; </div> </td>
+                <td class="white"><div id="C33" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp; </div> </td>
+                <td class="black"><div id="C34" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp; </div></td>
+                <td class="white"><div id="C35" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp; </div></td>
+                <td class="black"><div id="C36" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp; </div></td>
+                <td class="white"><div id="C37" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp; </div></td>
+                <td class="black"><div id="C38" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp; </div></td>
+
+            </tr>
+            <tr>
+                <td class="black" ><div id="D41" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp;</div> </td>
+                <td class="white" ><div id="D42" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp;</div></td>
+                <td class="black" ><div id="D43" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp;</div></td>
+                <td class="white" ><div id="D44" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp;</div></td>
+                <td class="black" ><div id="D45" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp;</div> </td>
+                <td class="white" ><div id="D46" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp;</div></td>
+                <td class="black" ><div id="D47" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp;</div></td>
+                <td class="white" ><div id="D48" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp;</div></td>
+
+            </tr>
+            <tr>
+                <td class="white"><div id="E51" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp;</div></td>
+                <td class="black"><div id="E52" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp;</div> </td>
+                <td class="white"><div id="E53" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp;</div></td>
+                <td class="black"><div id="E54" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp;</div></td>
+                <td class="white"><div id="E55" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp;</div></td>
+                <td class="black"><div id="E56" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp;</div></td>
+                <td class="white"><div id="E57" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp;</div></td>
+                <td class="black"><div id="E58" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp;</div></td>
+
+            </tr>
+            <tr>
+                <td class="black"><div id="F61" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp;</div> </td>
+                <td class="white"><div id="F62" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp;</div></td>
+                <td class="black"><div id="F63" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp;</div></td>
+                <td class="white"><div id="F64" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp;</div></td>
+                <td class="black"><div id="F65" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp;</div></td>
+                <td class="white"><div id="F66" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp;</div></td>
+                <td class="black"><div id="F67" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp;</div></td>
+                <td class="white"><div id="F68" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp;</div></td>
+
+            </tr>
+            <tr>
+                <td class="white"><div id="G71" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp; <h1  class="blackcoin"  id="g1" draggable="true" ondragstart="Drag(event)" >♙</h1></div> </td>
+                <td class="black"><div id="G72" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp; <h1  class="blackcoin"  id="g2" draggable="true" ondragstart="Drag(event)">♙</h1> </div> </td>
+                <td class="white"><div id="G73" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp; <h1  class="blackcoin"  id="g3" draggable="true" ondragstart="Drag(event)">♙</h1> </div> </td>
+                <td class="black"><div id="G74" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp; <h1  class="blackcoin"  id="g4" draggable="true" ondragstart="Drag(event)">♙</h1> </div> </td>
+                <td class="white"><div id="G75" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp; <h1   class="blackcoin" id="g5" draggable="true" ondragstart="Drag(event)">♙</h1> </div> </td>
+                <td class="black"><div id="G76" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp; <h1  class="blackcoin"  id="g6" draggable="true" ondragstart="Drag(event)">♙</h1> </div> </td>
+                <td class="white"><div id="G77" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp; <h1  class="blackcoin"  id="g7" draggable="true" ondragstart="Drag(event)">♙</h1> </div> </td>
+                <td class="black"><div id="G78" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp; <h1  class="blackcoin"  id="g8" draggable="true" ondragstart="Drag(event)">♙</h1> </div> </td>
+
+            </tr>
+            <tr>
+                <td class="black"><div id="H81" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp;<h1 class="blackcoin"  id="h1" draggable="true" ondragstart="Drag(event)">♜</h1></div> </td>
+                <td class="white"><div id="H82" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp;<h1 class="blackcoin"  id="h2" draggable="true" ondragstart="Drag(event)">♞</h1></div></td>
+                <td class="black"><div id="H83" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp;<h1 class="blackcoin"  id="h3" draggable="true" ondragstart="Drag(event)">♝</h1></div></td>
+                <td class="white"><div id="H84" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp;<h1 class="blackcoin"  id="h4" draggable="true" ondragstart="Drag(event)">♛</h1></div></td>
+                <td class="black"><div id="H85" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp;<h1 class="blackcoin"  id="h5" draggable="true" ondragstart="Drag(event)">♚</h1></div></td>
+                <td class="white"><div id="H86" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp;<h1 class="blackcoin"  id="h6" draggable="true" ondragstart="Drag(event)">♝</h1></div></td>
+                <td class="black"><div id="H87" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp;<h1 class="blackcoin"  id="h7" draggable="true" ondragstart="Drag(event)">♞</h1></div></td>
+                <td class="white"><div id="H88" ondragover="Dragover(event)"  ondrop="Drop(event)">&nbsp;<h1 class="blackcoin"  id="h8" draggable="true" ondragstart="Drag(event)">♜</h1></div></td>
+            </tr>
+        </table><br>
+        <input type="button" value="Auto Move" id="abcd"  ondragstart="Drag(event)" draggable="true">
+    
+    </div></div>
+    
+</body>
+</html>
