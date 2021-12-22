@@ -21,8 +21,8 @@ font-weight: bold;
            border: 2px solid teal;
            /* width: 70px ;
            height: 70px; */
-           width: 40px;
-           height: 40px;
+           width: 70px;
+           height: 70px;
            background-color: white;
         }
     .white{
@@ -37,8 +37,6 @@ font-weight: bold;
     }
 </style>
 <script>
-
-   
     function isPlacingValid(srcy,srcx,desty,destx,coin)
     {
         var value=Board[desty-1][destx-1];
@@ -79,8 +77,6 @@ font-weight: bold;
             value=pawnvalid(srcy,srcx,desty,destx)
             return value;
         }
-       
-        
         if(value==0)
          return true;
 
@@ -113,8 +109,6 @@ font-weight: bold;
         return true;
      if (srcy-y== 2 && srcx-x== 1 )
      return true;
-
-
 return false;
 
 }
@@ -176,12 +170,8 @@ function rookisvalid(srcy,srcx,y,x)
             if(value!=0)
             return false;
         }
-
-
     }
 //**************************************************
-
-
 //**************************************************
 if(direction==2)
     {
@@ -198,10 +188,6 @@ if(direction==2)
 
     }
 //**************************************************
-
-
-
-
 //**************************************************
 if(direction==1)
     {
@@ -214,11 +200,8 @@ if(direction==1)
             if(value!=0)
             return false;
         }
-
-
     }
 //**************************************************
-
 //**************************************************
 if(direction==3)
     {
@@ -231,13 +214,8 @@ if(direction==3)
             if(value!=0)
             return false;
         }
-
-
     }
-//****************
-//*************************
  return true;
-
 }
 function isbishopvalid(srcy,srcx,y,x){
     var originalcoin=Board[srcy-1][srcx-1];
@@ -285,8 +263,6 @@ function isbishopvalid(srcy,srcx,y,x){
             if(value!=0)
             return false;
     }
-
-
     }
     if((srcy - srcx)==(y-x))
     {
@@ -440,12 +416,8 @@ if(srcx!=x && srcy!=y)
             if(value!=0)
             return false;
         }
-
-
     }
 //**************************************************
-
-
 //**************************************************
 if(direction==2)
     {
@@ -462,10 +434,6 @@ if(direction==2)
 
     }
 //**************************************************
-
-
-
-
 //**************************************************
 if(direction==1)
     {
@@ -495,8 +463,6 @@ if(direction==3)
             if(value!=0)
             return false;
         }
-
-
     }
 //****************
 //*************************
@@ -605,10 +571,8 @@ function Kingvalid(srcy,srcx,y,x){
             }
             fullstr =fullstr + str + "\n";
             console.log(str);
-            
-
         }
-        document.getElementById("ta").value=fullstr;
+         document.getElementById("ta").value=fullstr;
     }
     function getY(id)
     {
@@ -619,9 +583,20 @@ function Kingvalid(srcy,srcx,y,x){
         return Number(id[2]);
     }
      function Drag(ev){
-         console.log("Start Drag")
-         console.log(ev.target.id)
-         ev.dataTransfer.setData("id",ev.target.id)
+         console.log("Start Drag");
+         console.log(ev.target.id);
+         var y=getY(ev.target.parentElement.id);
+         var x=getX(ev.target.parentElement.id);
+         var cointomove=Board[y-1][x-1];
+         var coincolor=cointomove.color;
+         var playercolor=document.getElementById("currentplayer").value;
+         console.log(y + "," + x + "," + coincolor + "," + playercolor);
+         if(coincolor!=playercolor)
+         {
+                alert("Not your chance");
+                return;
+         }
+         ev.dataTransfer.setData("id",ev.target.id);
      }
      function Dragover(ev)
      {
@@ -629,17 +604,16 @@ function Kingvalid(srcy,srcx,y,x){
         // console.log("Drag Over");
         // console.log(ev.target.id)
      }  
-     function f1(){
-        
+     function f1(){      
         var x1=Number( document.getElementById("tx1").value);
         var x2=Number( document.getElementById("tx2").value);
         var y1=Number( document.getElementById("ty1").value);
         var y2=Number( document.getElementById("ty2").value);
         doAutoMove(y1,x1,y2,x2);
     }
-     function doAutoMove(y1,x1,y2,x2)
+    function doAutoMove(y1,x1,y2,x2)
      {
-         y1=Number(y1);//abhadi
+         y1=Number(y1);
          y2=Number(y2);
          x1=Number(x1);
          x2=Number(x2);
@@ -657,25 +631,27 @@ function Kingvalid(srcy,srcx,y,x){
         var oldcoin=Board[y1-1][x1-1];
         var value=isPlacingValid(x1,y1,y2,x2,oldcoin);
         console.log(value);
+        //dest.removeChild();
         dest.appendChild(src);
         Board[y1-1][x1-1]=0;
         Board[y2-1][x2-1]=oldcoin;
         console.log(oldcoin);
         console.log("Board");
         printBoard();
-
-     }
-    function Drop(ev){
-    var targetid=event.target.id;// drop wali current id event.target se kuch bhi mangayenge wo current wale tag ka aayega
-      var droppingid= event.dataTransfer.getData("id");//Jo Id Hm Drag me call kiye the us id ko drop wali jagah par call kiye hy 
+ }
+    
+    function Drop(event){
+    var targetid=event.target.id;                                     // drop wali current id event.target se kuch bhi mangayenge wo current wale tag ka aayega
+      var droppingid= event.dataTransfer.getData("id");              //Jo Id Hm Drag me call kiye the us id ko drop wali jagah par call kiye hy 
         console.log(targetid);
-        var y=getY(targetid);// y(column) position 
-        var x=getX(targetid);// x(row) position
-        var b=document.getElementById(droppingid);// stor droppingid 
+        var y=getY(targetid);                                      // y(column) position 
+        var x=getX(targetid);                                     // x(row) position
+        var b=document.getElementById(droppingid);               // stor droppingid 
         var bparent=document.getElementById(b.parentElement.id);//parentElemnt-   
-        var srcx=getX(bparent.id); 
+        var srcx=getX(bparent.id);                             //
         var srcy=getY(bparent.id);
         var oldcoin=Board[srcy-1][srcx-1];
+        var destcoin=Board[y-1][x-1];
         var value=isPlacingValid(srcy,srcx,y,x,oldcoin);
         console.log(value);
         if(!value)
@@ -683,23 +659,54 @@ function Kingvalid(srcy,srcx,y,x){
          alert("cannot drop Here")
             return;
         }
-        ev.preventDefault;
+        event.preventDefault;
+        alert(oldcoin);
+        if(destcoin!=0)
+        {
+            
+        var droppedcoin=document.getElementById(targetid);
+        //alert(droppingcoin);
+        document.getElementById("kill").innerHTML+=droppedcoin.innerHTML;
+        event.target.removeChild(event.target.childNodes[1]); 
+        alert("removing");
+        }
         event.target.appendChild(b);
         console.log(srcy + "," + srcx + "," + y + "," + x);
         Board[srcy-1][srcx-1]=0;
+        var playercolor=document.getElementById("currentplayer").value;
+        if(playercolor=="white")
+        document.getElementById("currentplayer").value="black";
+        else
+        document.getElementById("currentplayer").value="white";
         //Board[0][0]=100;
         Board[y-1][x-1]=oldcoin;
         console.log(oldcoin)
         console.log("Board");
+
+        //8888888888888888888888888888888888888
+        
+
+
         printBoard();
-    }   
        
+
+
+        //document.getElementById("a").value=oldcoin;
+        //console.log(oldcoin)
+
+
+    }   
 </script>
 <body>
-    <textarea id="ta">data</textarea>
+     <textarea id="ta">data</textarea>
+     <br>
+    <input value="white" type="text" id="currentplayer">
     <div class="row">
-        <div class="col-sm-12 p-4"></div>
+        <div id="kill"></div>
+        <div class="col-sm-12 p-4">
+        </div>
         <div class="col-sm-3"></div> 
+
         <div class="col-sm-5">
         <table>
             <tr>
